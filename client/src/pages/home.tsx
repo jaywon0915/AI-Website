@@ -317,57 +317,102 @@ function Benefits() {
   );
 }
 
-function Testimonials() {
-  const testimonials = [
-    {
-      quote: "Our video went viral on Instagram. We've had customers come in specifically saying they saw our story online.",
-      author: "Maria Chen",
-      role: "Owner, The Rustic Bean",
-      rating: 5
-    },
-    {
-      quote: "I never thought I could afford professional video content. StoryBite made it possible and the results exceeded all expectations.",
-      author: "James Morrison",
-      role: "Chef, Olive & Thyme",
-      rating: 5
-    },
-    {
-      quote: "The AI captured the essence of our 50-year family tradition perfectly. Our regulars were moved to tears.",
-      author: "Sophie Nakamura",
-      role: "Manager, Sakura Café",
-      rating: 5
-    }
-  ];
-
+function InstagramTrend() {
   return (
-    <section className="py-32 px-6 bg-gradient-to-b from-card to-background">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-32 px-6 bg-gradient-to-b from-card to-background relative overflow-hidden">
+      <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-full blur-3xl" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">Success Stories</span>
+          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">The New Discovery Era</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            Loved by <span className="italic text-amber-600">Storytellers</span>
+            Instagram is the <span className="italic text-amber-600">New Search</span>
           </h2>
+          <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto">
+            67% of Gen Z and Millennials now search Instagram before visiting a new cafe or restaurant. 
+            If you're not showing up with compelling content, you're invisible.
+          </p>
         </AnimatedSection>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <AnimatedSection key={testimonial.author} delay={index * 0.15}>
-              <div className="h-full p-8 rounded-3xl bg-white border border-amber-100 shadow-lg shadow-amber-500/5">
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
-                  ))}
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <AnimatedSection delay={0.1}>
+            <div className="space-y-6">
+              {[
+                {
+                  stat: "67%",
+                  title: "Search Instagram First",
+                  description: "Before trying a new spot, customers scroll through your Instagram to see if it's worth the visit."
+                },
+                {
+                  stat: "4.2x",
+                  title: "More Discovery via Reels",
+                  description: "Video content on Instagram Reels reaches 4.2x more non-followers than static posts."
+                },
+                {
+                  stat: "83%",
+                  title: "Trust Visual Stories",
+                  description: "Customers are more likely to trust and visit businesses that share authentic visual stories."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: false, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="flex gap-5 p-6 rounded-2xl bg-white/80 border border-amber-100 shadow-lg shadow-amber-500/5"
+                >
+                  <div className="flex-shrink-0">
+                    <span className="text-3xl font-bold text-gradient">{item.stat}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg text-foreground mb-1">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedSection>
+          
+          <AnimatedSection delay={0.2}>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500 via-purple-500 to-amber-500 rounded-[2.5rem] blur-xl opacity-20" />
+              <div className="relative bg-gradient-to-br from-stone-900 to-stone-800 rounded-[2rem] p-6 shadow-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500" />
+                  <div>
+                    <p className="text-white font-semibold text-sm">your_cafe</p>
+                    <p className="text-white/50 text-xs">Sponsored</p>
+                  </div>
                 </div>
-                <blockquote className="font-serif text-xl text-foreground leading-relaxed mb-8">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div>
-                  <p className="font-semibold text-foreground">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                <div className="aspect-[4/5] rounded-xl overflow-hidden mb-4">
+                  <img 
+                    src={heroImage}
+                    alt="Instagram preview"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+                <div className="flex items-center gap-4 mb-3">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                  </svg>
+                </div>
+                <p className="text-white text-sm">
+                  <span className="font-semibold">12,847 views</span>
+                </p>
+                <p className="text-white/70 text-sm mt-1">
+                  Discover our story — from a small family kitchen to your favorite neighborhood spot ✨
+                </p>
               </div>
-            </AnimatedSection>
-          ))}
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
@@ -441,7 +486,7 @@ export default function Home() {
       <HowItWorks />
       <DemoVideo />
       <Benefits />
-      <Testimonials />
+      <InstagramTrend />
       <CTA />
       <Footer />
     </main>
