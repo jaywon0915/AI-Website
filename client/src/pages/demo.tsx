@@ -20,14 +20,14 @@ export default function Demo() {
               data-testid="button-back-home"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Home
+              홈으로 돌아가기
             </Button>
           </Link>
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-black" />
             </div>
-            <span className="font-serif text-xl">StoryBite</span>
+            <span className="font-serif text-xl">스토리바이트</span>
           </div>
         </div>
       </header>
@@ -42,14 +42,14 @@ export default function Demo() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 text-amber-400 text-sm font-medium tracking-wide mb-6">
               <Play className="w-4 h-4" />
-              Demo Showcase
+              데모 쇼케이스
             </span>
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
-              See the <span className="italic text-amber-400">Magic</span> in Action
+              <span className="italic text-amber-400">마법</span>을 직접 확인하세요
             </h1>
             <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Watch how we transformed The Rustic Bean's 30-year journey into a captivating visual story 
-              that's been viewed over 2 million times.
+              30년 역사의 '소담한 찻집'이 어떻게 200만 조회수를 넘긴 
+              감동적인 비주얼 스토리로 탄생했는지 확인하세요.
             </p>
           </motion.div>
 
@@ -61,7 +61,7 @@ export default function Demo() {
           >
             <img 
               src={heroImage}
-              alt="Demo video placeholder"
+              alt="데모 영상 플레이스홀더"
               className="absolute inset-0 w-full h-full object-cover"
             />
             
@@ -126,7 +126,7 @@ export default function Demo() {
                 className="absolute top-6 left-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/90 text-white text-sm font-medium"
               >
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                Playing
+                재생 중
               </motion.div>
             )}
           </motion.div>
@@ -138,9 +138,9 @@ export default function Demo() {
             className="mt-12 grid md:grid-cols-3 gap-6"
           >
             {[
-              { label: "Views", value: "2.1M+" },
-              { label: "Engagement Rate", value: "12.4%" },
-              { label: "New Customers", value: "340+" }
+              { label: "조회수", value: "210만+" },
+              { label: "참여율", value: "12.4%" },
+              { label: "신규 고객", value: "340+" }
             ].map((stat) => (
               <div 
                 key={stat.label}
@@ -163,18 +163,18 @@ export default function Demo() {
             className="text-center"
           >
             <h2 className="font-serif text-3xl md:text-4xl mb-4">
-              More Success Stories
+              더 많은 성공 사례
             </h2>
             <p className="text-white/60 mb-10">
-              Browse examples from different industries and styles
+              다양한 업종과 스타일의 예시를 둘러보세요
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Olive & Thyme", category: "Fine Dining", duration: "1:45" },
-              { title: "Sakura Café", category: "Japanese Fusion", duration: "2:12" },
-              { title: "Bean Counter", category: "Coffee Shop", duration: "1:58" }
+              { title: "올리브 앤 타임", category: "파인 다이닝", duration: "1:45" },
+              { title: "사쿠라 카페", category: "일본식 퓨전", duration: "2:12" },
+              { title: "빈 카운터", category: "커피숍", duration: "1:58" }
             ].map((video, index) => (
               <motion.div
                 key={video.title}
@@ -214,17 +214,17 @@ export default function Demo() {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="font-serif text-3xl md:text-4xl mb-4">
-            Ready to Create Your Story?
+            당신의 스토리를 만들 준비가 되셨나요?
           </h2>
           <p className="text-white/60 mb-8">
-            Join hundreds of businesses already captivating their audience with AI-generated videos.
+            이미 수백 개의 비즈니스가 AI 생성 영상으로 고객을 사로잡고 있습니다.
           </p>
           <Button 
             size="lg"
             className="bg-amber-500 hover:bg-amber-400 text-black px-10 py-6 text-lg rounded-full font-semibold"
             data-testid="button-create-story"
           >
-            Start Creating
+            제작 시작하기
           </Button>
         </motion.div>
       </section>
@@ -235,9 +235,9 @@ export default function Demo() {
             <div className="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-black" />
             </div>
-            <span className="font-serif text-lg">StoryBite</span>
+            <span className="font-serif text-lg">스토리바이트</span>
           </div>
-          <p className="text-white/40 text-sm">© 2026 StoryBite. All rights reserved.</p>
+          <p className="text-white/40 text-sm">© 2026 스토리바이트. All rights reserved.</p>
         </div>
       </footer>
     </main>

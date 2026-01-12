@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
-import { Play, Sparkles, TrendingUp, Users, Video, Zap, ArrowRight, Star } from "lucide-react";
+import { Play, Sparkles, TrendingUp, Users, Video, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@assets/generated_images/warm_cafe_interior_scene.png";
 
@@ -40,7 +40,7 @@ function Hero() {
       >
         <img 
           src={heroImage} 
-          alt="Warm cafe interior"
+          alt="따뜻한 카페 인테리어"
           className="w-full h-full object-cover scale-110"
         />
         <div className="absolute inset-0 video-overlay" />
@@ -58,7 +58,7 @@ function Hero() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark text-white/90 text-sm font-medium tracking-wide">
             <Sparkles className="w-4 h-4" />
-            AI-Powered Storytelling
+            AI 기반 스토리텔링
           </span>
         </motion.div>
         
@@ -68,9 +68,9 @@ function Hero() {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight max-w-5xl"
         >
-          Share Your Story
+          당신의 이야기를
           <br />
-          <span className="italic text-amber-300">Bite by Bite</span>
+          <span className="italic text-amber-300">한 입씩 전하세요</span>
         </motion.h1>
         
         <motion.p
@@ -79,8 +79,8 @@ function Hero() {
           transition={{ duration: 1, delay: 0.7 }}
           className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl font-light leading-relaxed"
         >
-          Transform your cafe or restaurant's unique journey into stunning AI-generated videos 
-          that captivate customers and amplify your online presence.
+          카페와 레스토랑의 특별한 여정을 AI가 만든 감동적인 영상으로 변환하여
+          고객을 사로잡고 온라인 노출을 높이세요.
         </motion.p>
         
         <motion.div
@@ -96,7 +96,7 @@ function Hero() {
               data-testid="button-watch-demo"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Watch Demo
+              데모 보기
             </Button>
           </Link>
           <Button 
@@ -105,7 +105,7 @@ function Hero() {
             className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg rounded-full backdrop-blur-sm"
             data-testid="button-get-started"
           >
-            Get Started
+            시작하기
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </motion.div>
@@ -133,18 +133,18 @@ function HowItWorks() {
   const steps = [
     {
       number: "01",
-      title: "Tell Your Story",
-      description: "Share the passion, history, and unique journey behind your cafe or restaurant. We listen to every detail."
+      title: "이야기를 들려주세요",
+      description: "카페나 레스토랑의 열정, 역사, 특별한 여정을 공유해 주세요. 모든 디테일을 경청합니다."
     },
     {
       number: "02", 
-      title: "AI Magic Happens",
-      description: "Our generative AI transforms your narrative into stunning visuals, crafting scenes that bring your story to life."
+      title: "AI 마법이 시작됩니다",
+      description: "생성형 AI가 당신의 이야기를 감동적인 영상으로 변환하여 스토리에 생명을 불어넣습니다."
     },
     {
       number: "03",
-      title: "Captivate & Grow",
-      description: "Share your video across platforms. Watch as customers connect with your story and your reach expands."
+      title: "고객을 사로잡고 성장하세요",
+      description: "다양한 플랫폼에서 영상을 공유하세요. 고객들이 당신의 이야기에 공감하고 도달 범위가 확장됩니다."
     }
   ];
 
@@ -152,9 +152,9 @@ function HowItWorks() {
     <section className="py-32 px-6 bg-gradient-to-b from-background to-card grain">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-20">
-          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">How It Works</span>
+          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">이용 방법</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4 text-foreground">
-            From Words to <span className="italic text-amber-600">Wonder</span>
+            말에서 <span className="italic text-amber-600">감동으로</span>
           </h2>
         </AnimatedSection>
         
@@ -185,12 +185,12 @@ function DemoVideo() {
       
       <div className="max-w-5xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">See It In Action</span>
+          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">직접 확인하세요</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            Watch the <span className="italic text-amber-400">Transformation</span>
+            <span className="italic text-amber-400">변화</span>를 경험하세요
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
-            See how we turned The Rustic Bean's 30-year journey into a viral video with over 2 million views.
+            30년 역사의 '소담한 찻집'이 어떻게 200만 조회수의 바이럴 영상으로 탄생했는지 확인하세요.
           </p>
         </AnimatedSection>
         
@@ -198,7 +198,7 @@ function DemoVideo() {
           <div className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-video shadow-2xl shadow-amber-500/10 group cursor-pointer">
             <img 
               src={heroImage}
-              alt="Demo video"
+              alt="데모 영상"
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
@@ -216,8 +216,8 @@ function DemoVideo() {
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">Featured Story</p>
-                  <p className="font-serif text-xl">The Rustic Bean — A Family Legacy</p>
+                  <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">대표 스토리</p>
+                  <p className="font-serif text-xl">소담한 찻집 — 가족의 유산</p>
                 </div>
                 <span className="text-white/60 text-sm">2:34</span>
               </div>
@@ -227,9 +227,9 @@ function DemoVideo() {
 
         <AnimatedSection delay={0.3} className="mt-10 grid grid-cols-3 gap-6 text-center">
           {[
-            { value: "2.1M+", label: "Views" },
-            { value: "12.4%", label: "Engagement" },
-            { value: "340+", label: "New Customers" }
+            { value: "210만+", label: "조회수" },
+            { value: "12.4%", label: "참여율" },
+            { value: "340+", label: "신규 고객" }
           ].map((stat) => (
             <div key={stat.label} className="p-4 rounded-2xl bg-white/5 border border-white/10">
               <p className="text-2xl md:text-3xl font-bold text-amber-400">{stat.value}</p>
@@ -246,31 +246,31 @@ function Benefits() {
   const benefits = [
     {
       icon: TrendingUp,
-      title: "Boost Online Exposure",
-      description: "Video content gets 1200% more shares than text and images combined. Stand out in feeds and capture attention.",
+      title: "온라인 노출 극대화",
+      description: "영상 콘텐츠는 텍스트와 이미지보다 1200% 더 많이 공유됩니다. 피드에서 눈에 띄고 관심을 사로잡으세요.",
       stat: "1200%",
-      statLabel: "More Shares"
+      statLabel: "더 많은 공유"
     },
     {
       icon: Users,
-      title: "Build Emotional Connections",
-      description: "Stories create bonds. Let customers feel the heart behind your business before they even walk through the door.",
+      title: "감정적 유대감 형성",
+      description: "스토리는 유대감을 만듭니다. 고객이 매장에 방문하기 전에 비즈니스의 진심을 느끼게 하세요.",
       stat: "73%",
-      statLabel: "Customer Loyalty"
+      statLabel: "고객 충성도"
     },
     {
       icon: Zap,
-      title: "Save Time & Resources",
-      description: "Skip expensive video production. Our AI creates professional-quality content in a fraction of the time and cost.",
-      stat: "10x",
-      statLabel: "Faster Production"
+      title: "시간과 비용 절약",
+      description: "비싼 영상 제작을 건너뛰세요. AI가 전문적인 퀄리티의 콘텐츠를 훨씬 빠르고 저렴하게 만들어 드립니다.",
+      stat: "10배",
+      statLabel: "빠른 제작"
     },
     {
       icon: Video,
-      title: "Platform-Ready Content",
-      description: "Get optimized videos for Instagram, TikTok, YouTube, and your website. One story, endless possibilities.",
+      title: "플랫폼 맞춤 콘텐츠",
+      description: "인스타그램, 틱톡, 유튜브, 웹사이트에 최적화된 영상을 받으세요. 하나의 스토리, 무한한 가능성.",
       stat: "5+",
-      statLabel: "Platforms"
+      statLabel: "플랫폼"
     }
   ];
 
@@ -281,13 +281,13 @@ function Benefits() {
       
       <div className="max-w-6xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-20">
-          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">Why StoryBite</span>
+          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">왜 스토리바이트인가</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            The Power of <span className="italic text-amber-400">Visual Stories</span>
+            <span className="italic text-amber-400">비주얼 스토리</span>의 힘
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
-            In a world of endless scrolling, authentic stories cut through the noise. 
-            Here's why generative AI storytelling is your competitive advantage.
+            끝없는 스크롤 세상에서 진정성 있는 스토리가 돋보입니다.
+            생성형 AI 스토리텔링이 경쟁 우위가 되는 이유입니다.
           </p>
         </AnimatedSection>
         
@@ -325,13 +325,13 @@ function InstagramTrend() {
       
       <div className="max-w-6xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">The New Discovery Era</span>
+          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">새로운 발견의 시대</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            Instagram is the <span className="italic text-amber-600">New Search</span>
+            인스타그램이 <span className="italic text-amber-600">새로운 검색</span>입니다
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto">
-            67% of Gen Z and Millennials now search Instagram before visiting a new cafe or restaurant. 
-            If you're not showing up with compelling content, you're invisible.
+            MZ세대의 67%가 새로운 카페나 레스토랑을 방문하기 전에 인스타그램을 먼저 검색합니다.
+            매력적인 콘텐츠가 없다면, 당신은 보이지 않습니다.
           </p>
         </AnimatedSection>
         
@@ -341,18 +341,18 @@ function InstagramTrend() {
               {[
                 {
                   stat: "67%",
-                  title: "Search Instagram First",
-                  description: "Before trying a new spot, customers scroll through your Instagram to see if it's worth the visit."
+                  title: "인스타그램 먼저 검색",
+                  description: "새로운 맛집을 찾을 때, 고객들은 방문할 가치가 있는지 인스타그램을 먼저 확인합니다."
                 },
                 {
-                  stat: "4.2x",
-                  title: "More Discovery via Reels",
-                  description: "Video content on Instagram Reels reaches 4.2x more non-followers than static posts."
+                  stat: "4.2배",
+                  title: "릴스로 더 많은 발견",
+                  description: "인스타그램 릴스의 영상 콘텐츠는 일반 게시물보다 4.2배 더 많은 비팔로워에게 도달합니다."
                 },
                 {
                   stat: "83%",
-                  title: "Trust Visual Stories",
-                  description: "Customers are more likely to trust and visit businesses that share authentic visual stories."
+                  title: "비주얼 스토리 신뢰",
+                  description: "고객들은 진정성 있는 비주얼 스토리를 공유하는 비즈니스를 더 신뢰하고 방문합니다."
                 }
               ].map((item, index) => (
                 <motion.div
@@ -383,13 +383,13 @@ function InstagramTrend() {
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500" />
                   <div>
                     <p className="text-white font-semibold text-sm">your_cafe</p>
-                    <p className="text-white/50 text-xs">Sponsored</p>
+                    <p className="text-white/50 text-xs">광고</p>
                   </div>
                 </div>
                 <div className="aspect-[4/5] rounded-xl overflow-hidden mb-4">
                   <img 
                     src={heroImage}
-                    alt="Instagram preview"
+                    alt="인스타그램 미리보기"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -405,10 +405,10 @@ function InstagramTrend() {
                   </svg>
                 </div>
                 <p className="text-white text-sm">
-                  <span className="font-semibold">12,847 views</span>
+                  <span className="font-semibold">조회수 12,847회</span>
                 </p>
                 <p className="text-white/70 text-sm mt-1">
-                  Discover our story — from a small family kitchen to your favorite neighborhood spot ✨
+                  우리의 이야기를 만나보세요 — 작은 가족 주방에서 당신의 단골 맛집이 되기까지 ✨
                 </p>
               </div>
             </div>
@@ -426,10 +426,10 @@ function CTA() {
       
       <AnimatedSection className="max-w-4xl mx-auto text-center relative z-10">
         <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl">
-          Ready to Share Your Story?
+          당신의 이야기를 시작할 준비가 되셨나요?
         </h2>
         <p className="mt-6 text-xl text-black/70 max-w-2xl mx-auto">
-          Join hundreds of cafes and restaurants already captivating customers with AI-generated story videos.
+          이미 수백 개의 카페와 레스토랑이 AI 생성 스토리 영상으로 고객을 사로잡고 있습니다.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
@@ -437,7 +437,7 @@ function CTA() {
             className="bg-black hover:bg-stone-800 text-white px-10 py-6 text-lg rounded-full font-semibold"
             data-testid="button-start-your-story"
           >
-            Start Your Story
+            스토리 시작하기
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
           <Link href="/demo">
@@ -448,7 +448,7 @@ function CTA() {
               data-testid="button-see-examples"
             >
               <Play className="w-5 h-5 mr-2" />
-              See Examples
+              예시 보기
             </Button>
           </Link>
         </div>
@@ -465,15 +465,15 @@ function Footer() {
           <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-black" />
           </div>
-          <span className="font-serif text-2xl">StoryBite</span>
+          <span className="font-serif text-2xl">스토리바이트</span>
         </div>
         <nav className="flex gap-8 text-white/60">
-          <a href="#" className="hover:text-white transition-colors" data-testid="link-about">About</a>
-          <a href="#" className="hover:text-white transition-colors" data-testid="link-pricing">Pricing</a>
-          <Link href="/demo" className="hover:text-white transition-colors" data-testid="link-demo">Demo</Link>
-          <a href="#" className="hover:text-white transition-colors" data-testid="link-contact">Contact</a>
+          <a href="#" className="hover:text-white transition-colors" data-testid="link-about">소개</a>
+          <a href="#" className="hover:text-white transition-colors" data-testid="link-pricing">가격</a>
+          <Link href="/demo" className="hover:text-white transition-colors" data-testid="link-demo">데모</Link>
+          <a href="#" className="hover:text-white transition-colors" data-testid="link-contact">문의</a>
         </nav>
-        <p className="text-white/40 text-sm">© 2026 StoryBite. All rights reserved.</p>
+        <p className="text-white/40 text-sm">© 2026 스토리바이트. All rights reserved.</p>
       </div>
     </footer>
   );
