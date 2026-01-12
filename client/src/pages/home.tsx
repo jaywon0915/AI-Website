@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Play, Sparkles, TrendingUp, Users, Video, Zap, ArrowRight } from "lucide-react";
@@ -38,11 +38,15 @@ function Hero() {
         style={{ y }}
         className="absolute inset-0"
       >
-        <img 
-          src={heroImage} 
-          alt="따뜻한 카페 인테리어"
+        <video 
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover scale-110"
-        />
+        >
+          <source src="/샌디레이크.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 video-overlay" />
       </motion.div>
       
@@ -70,7 +74,7 @@ function Hero() {
         >
           당신의 이야기를
           <br />
-          <span className="italic text-amber-300">한 입씩 전하세요</span>
+          <span className="italic text-amber-300">AI를 통해 전하세요</span>
         </motion.h1>
         
         <motion.p
@@ -152,7 +156,7 @@ function HowItWorks() {
     <section className="py-32 px-6 bg-gradient-to-b from-background to-card grain">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-20">
-          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">이용 방법</span>
+          <span className="text-amber-600 font-medium tracking-widest text-sm uppercase"></span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4 text-foreground">
             말에서 <span className="italic text-amber-600">감동으로</span>
           </h2>
@@ -179,6 +183,40 @@ function HowItWorks() {
 }
 
 function DemoVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const container = containerRef.current;
+    
+    if (!video || !container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch((error) => {
+              // Handle autoplay restrictions
+              console.log("Video autoplay prevented:", error);
+            });
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Play when 50% of video is visible
+      }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="py-32 px-6 bg-stone-950 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(251,191,36,0.08),transparent_60%)]" />
@@ -190,34 +228,30 @@ function DemoVideo() {
             <span className="italic text-amber-400">변화</span>를 경험하세요
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
-            30년 역사의 '소담한 찻집'이 어떻게 200만 조회수의 바이럴 영상으로 탄생했는지 확인하세요.
+            포항 유일의 정통 터키식 커피, 그 이야기를 만나보세요.
           </p>
         </AnimatedSection>
         
         <AnimatedSection delay={0.2}>
-          <div className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-video shadow-2xl shadow-amber-500/10 group cursor-pointer">
-            <img 
-              src={heroImage}
-              alt="데모 영상"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
-            
-            <div className="absolute inset-0 flex items-center justify-center" data-testid="button-demo-play">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-24 h-24 rounded-full bg-amber-500 group-hover:bg-amber-400 flex items-center justify-center shadow-xl shadow-amber-500/30 transition-colors"
-              >
-                <Play className="w-10 h-10 text-black ml-1" />
-              </motion.div>
-            </div>
+          <div 
+            ref={containerRef}
+            className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-video shadow-2xl shadow-amber-500/10 group"
+          >
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/Sora_샌디레이크.mp4" type="video/mp4" />
+            </video>
 
             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">대표 스토리</p>
-                  <p className="font-serif text-xl">소담한 찻집 — 가족의 유산</p>
+                  <p className="font-serif text-xl">배움에서 성장하는 샌디레이크 — 배움에 중요성</p>
                 </div>
                 <span className="text-white/60 text-sm">2:34</span>
               </div>
