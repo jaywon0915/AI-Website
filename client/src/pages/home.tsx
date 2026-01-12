@@ -178,6 +178,70 @@ function HowItWorks() {
   );
 }
 
+function DemoVideo() {
+  return (
+    <section className="py-32 px-6 bg-stone-950 text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(251,191,36,0.08),transparent_60%)]" />
+      
+      <div className="max-w-5xl mx-auto relative z-10">
+        <AnimatedSection className="text-center mb-16">
+          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">See It In Action</span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
+            Watch the <span className="italic text-amber-400">Transformation</span>
+          </h2>
+          <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
+            See how we turned The Rustic Bean's 30-year journey into a viral video with over 2 million views.
+          </p>
+        </AnimatedSection>
+        
+        <AnimatedSection delay={0.2}>
+          <div className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-video shadow-2xl shadow-amber-500/10 group cursor-pointer">
+            <img 
+              src={heroImage}
+              alt="Demo video"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+            
+            <div className="absolute inset-0 flex items-center justify-center" data-testid="button-demo-play">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-24 h-24 rounded-full bg-amber-500 group-hover:bg-amber-400 flex items-center justify-center shadow-xl shadow-amber-500/30 transition-colors"
+              >
+                <Play className="w-10 h-10 text-black ml-1" />
+              </motion.div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">Featured Story</p>
+                  <p className="font-serif text-xl">The Rustic Bean — A Family Legacy</p>
+                </div>
+                <span className="text-white/60 text-sm">2:34</span>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.3} className="mt-10 grid grid-cols-3 gap-6 text-center">
+          {[
+            { value: "2.1M+", label: "Views" },
+            { value: "12.4%", label: "Engagement" },
+            { value: "340+", label: "New Customers" }
+          ].map((stat) => (
+            <div key={stat.label} className="p-4 rounded-2xl bg-white/5 border border-white/10">
+              <p className="text-2xl md:text-3xl font-bold text-amber-400">{stat.value}</p>
+              <p className="text-xs text-white/50 uppercase tracking-wider mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 function Benefits() {
   const benefits = [
     {
@@ -375,6 +439,7 @@ export default function Home() {
     <main className="overflow-hidden">
       <Hero />
       <HowItWorks />
+      <DemoVideo />
       <Benefits />
       <Testimonials />
       <CTA />
