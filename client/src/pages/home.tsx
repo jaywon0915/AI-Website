@@ -7,7 +7,7 @@ import heroImage from "@assets/generated_images/warm_cafe_interior_scene.png";
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
   
   return (
     <motion.div
