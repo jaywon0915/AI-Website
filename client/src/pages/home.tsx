@@ -69,12 +69,12 @@ function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.5 }}  
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight max-w-5xl"
         >
-          당신의 이야기를
+          당신의 이야기를 
           <br />
-          <span className="italic text-amber-300">AI를 통해 전하세요</span>
+          <span className="italic text-amber-300">더 많은 사람들에게</span>
         </motion.h1>
         
         <motion.p
@@ -148,7 +148,7 @@ function HowItWorks() {
     {
       number: "03",
       title: "고객을 사로잡고 성장하세요",
-      description: "다양한 플랫폼에서 영상을 공유하세요. 고객들이 당신의 이야기에 공감하고 도달 범위가 확장됩니다."
+      description: "온라인인 플랫폼에서 영상을 공유. 고객들이 당신의 이야기에 공감하고 도달 범위가 확장됩니다."
     }
   ];
 
@@ -223,9 +223,9 @@ function DemoVideo() {
       
       <div className="max-w-5xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase">직접 확인하세요</span>
+          <span className="text-amber-400 font-medium tracking-widest text-sm uppercase"></span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            <span className="italic text-amber-400">변화</span>를 경험하세요
+            메뉴판을 넘어서 <span className="italic text-amber-400">경험을 선물하세요</span>
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
             포항 유일의 정통 터키식 커피, 그 이야기를 만나보세요.
@@ -251,7 +251,7 @@ function DemoVideo() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">대표 스토리</p>
-                  <p className="font-serif text-xl">배움에서 성장하는 샌디레이크 — 배움에 중요성</p>
+                  <p className="font-serif text-xl">샌디레이크 — 전통 터키식 커피의 이야기</p>
                 </div>
                 <span className="text-white/60 text-sm">2:34</span>
               </div>
@@ -261,9 +261,9 @@ function DemoVideo() {
 
         <AnimatedSection delay={0.3} className="mt-10 grid grid-cols-3 gap-6 text-center">
           {[
-            { value: "210만+", label: "조회수" },
-            { value: "12.4%", label: "참여율" },
-            { value: "340+", label: "신규 고객" }
+           { value: "10분", label: "제작 시간" },
+           { value: "AI 자동화", label: "제작 방식" },
+           { value: "영상 콘텐츠", label: "결과물 유형" }           
           ].map((stat) => (
             <div key={stat.label} className="p-4 rounded-2xl bg-white/5 border border-white/10">
               <p className="text-2xl md:text-3xl font-bold text-amber-400">{stat.value}</p>
@@ -352,6 +352,40 @@ function Benefits() {
 }
 
 function InstagramTrend() {
+  const instagramVideoRef = useRef<HTMLVideoElement>(null);
+  const instagramContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = instagramVideoRef.current;
+    const container = instagramContainerRef.current;
+    
+    if (!video || !container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch((error) => {
+              // Handle autoplay restrictions
+              console.log("Video autoplay prevented:", error);
+            });
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Play when 50% of video is visible
+      }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="py-32 px-6 bg-gradient-to-b from-card to-background relative overflow-hidden">
       <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full blur-3xl" />
@@ -420,12 +454,19 @@ function InstagramTrend() {
                     <p className="text-white/50 text-xs">광고</p>
                   </div>
                 </div>
-                <div className="aspect-[4/5] rounded-xl overflow-hidden mb-4">
-                  <img 
-                    src={heroImage}
-                    alt="인스타그램 미리보기"
+                <div 
+                  ref={instagramContainerRef}
+                  className="aspect-[4/5] rounded-xl overflow-hidden mb-4"
+                >
+                  <video
+                    ref={instagramVideoRef}
+                    muted
+                    loop
+                    playsInline
                     className="w-full h-full object-cover"
-                  />
+                  >
+                    <source src="/샌디레이크1.mp4" type="video/mp4" />
+                  </video>
                 </div>
                 <div className="flex items-center gap-4 mb-3">
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

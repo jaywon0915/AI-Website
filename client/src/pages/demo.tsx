@@ -1,13 +1,61 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowLeft, Play, Pause, Volume2, VolumeX, Maximize, Sparkles } from "lucide-react";
+import { ArrowLeft, Play, Pause, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@assets/generated_images/warm_cafe_interior_scene.png";
 
 export default function Demo() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [showControls, setShowControls] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-play on mount
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.play().catch((error) => {
+      console.log("Video autoplay error:", error);
+    });
+  }, []);
+
+  // Handle play/pause state changes
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isPlaying) {
+      video.play().catch((error) => {
+        console.log("Video play error:", error);
+      });
+    } else {
+      video.pause();
+    }
+  }, [isPlaying]);
+
+  const handleMouseEnter = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+    setShowControls(true);
+  };
+
+  const handleMouseLeave = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowControls(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-stone-950 text-white">
@@ -32,43 +80,30 @@ export default function Demo() {
         </div>
       </header>
 
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 text-amber-400 text-sm font-medium tracking-wide mb-6">
-              <Play className="w-4 h-4" />
-              데모 쇼케이스
-            </span>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
-              <span className="italic text-amber-400">마법</span>을 직접 확인하세요
-            </h1>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              30년 역사의 '소담한 찻집'이 어떻게 200만 조회수를 넘긴 
-              감동적인 비주얼 스토리로 탄생했는지 확인하세요.
-            </p>
-          </motion.div>
-
+      <section className="pt-20 pb-20 px-6 min-h-screen flex items-center justify-center">
+        <div className="max-w-5xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-video shadow-2xl shadow-amber-500/10"
+            transition={{ duration: 0.8 }}
+            className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-[9/16] shadow-2xl shadow-amber-500/10 max-w-md mx-auto"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            <img 
-              src={heroImage}
-              alt="데모 영상 플레이스홀더"
+            <video
+              ref={videoRef}
+              loop
+              muted
+              playsInline
               className="absolute inset-0 w-full h-full object-cover"
-            />
-            
-            <div className="absolute inset-0 bg-black/40" />
+            >
+              <source src="/ramen.mp4" type="video/mp4" />
+            </video>
             
             <div 
-              className="absolute inset-0 flex items-center justify-center cursor-pointer group"
+              className={`absolute inset-0 flex items-center justify-center cursor-pointer group transition-opacity duration-300 ${
+                showControls ? "opacity-100" : "opacity-0"
+              }`}
               onClick={() => setIsPlaying(!isPlaying)}
               data-testid="button-play-video"
             >
@@ -88,47 +123,6 @@ export default function Demo() {
                 )}
               </motion.div>
             </div>
-
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-white/60">0:00 / 2:34</span>
-                  <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full w-1/3 bg-amber-500 rounded-full" />
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    data-testid="button-toggle-mute"
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5 text-white/70" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white/70" />
-                    )}
-                  </button>
-                  <button 
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    data-testid="button-fullscreen"
-                  >
-                    <Maximize className="w-5 h-5 text-white/70" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {isPlaying && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="absolute top-6 left-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/90 text-white text-sm font-medium"
-              >
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                재생 중
-              </motion.div>
-            )}
           </motion.div>
 
           <motion.div
@@ -138,9 +132,9 @@ export default function Demo() {
             className="mt-12 grid md:grid-cols-3 gap-6"
           >
             {[
-              { label: "조회수", value: "210만+" },
-              { label: "참여율", value: "12.4%" },
-              { label: "신규 고객", value: "340+" }
+            { value: "10분", label: "제작 시간" },
+            { value: "AI 자동화", label: "제작 방식" },
+            { value: "영상 콘텐츠", label: "결과물 유형" }     
             ].map((stat) => (
               <div 
                 key={stat.label}
