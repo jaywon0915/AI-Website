@@ -228,7 +228,7 @@ function DemoVideo() {
             메뉴판을 넘어서 <span className="italic text-amber-400">경험을 선물하세요</span>
           </h2>
           <p className="mt-6 text-lg text-white/60 max-w-2xl mx-auto">
-            포항 유일의 정통 터키식 커피, 그 이야기를 만나보세요.
+            터키식 정통 커피를 찾아 모험을 떠난 사장님에 이야기.
           </p>
         </AnimatedSection>
         
@@ -395,12 +395,12 @@ function InstagramTrend() {
         <AnimatedSection className="text-center mb-16">
           <span className="text-amber-600 font-medium tracking-widest text-sm uppercase">새로운 발견의 시대</span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mt-4">
-            인스타그램이 <span className="italic text-amber-600">새로운 검색</span>입니다
+           SNS가 <span className="italic text-amber-600">새로운 검색</span>입니다
           </h2>
           <p className="mt-6 text-lg text-muted-foreground max-w-3xl mx-auto">
-            MZ세대의 67%가 새로운 카페나 레스토랑을 방문하기 전에 인스타그램을 먼저 검색합니다.
+            MZ세대의 67%가 새로운 카페나 레스토랑을 방문하기 전에 SNS을 먼저 검색합니다.
             매력적인 콘텐츠가 없다면, 당신은 보이지 않습니다.
-          </p>
+          </p>    
         </AnimatedSection>
         
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -409,13 +409,13 @@ function InstagramTrend() {
               {[
                 {
                   stat: "67%",
-                  title: "인스타그램 먼저 검색",
+                  title: "SNS 먼저 검색",
                   description: "새로운 맛집을 찾을 때, 고객들은 방문할 가치가 있는지 인스타그램을 먼저 확인합니다."
                 },
                 {
                   stat: "4.2배",
                   title: "릴스로 더 많은 발견",
-                  description: "인스타그램 릴스의 영상 콘텐츠는 일반 게시물보다 4.2배 더 많은 비팔로워에게 도달합니다."
+                  description: "SNS 릴스의 영상 콘텐츠는 일반 게시물보다 4.2배 더 많은 비팔로워에게 도달합니다."
                 },
                 {
                   stat: "83%",

@@ -5,21 +5,89 @@ import { ArrowLeft, Play, Pause, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@assets/generated_images/warm_cafe_interior_scene.png";
 
+type VideoCardProps = {
+  title: string;
+  category: string;
+  duration: string;
+  videoSrc: string;
+  index: number;
+  onClick: (videoSrc: string) => void;
+};
+
+function VideoCard({ title, category, duration, videoSrc, index, onClick }: VideoCardProps) {
+  const cardVideoRef = useRef<HTMLVideoElement>(null);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+      className="group relative rounded-2xl overflow-hidden bg-stone-900 aspect-video cursor-pointer"
+      data-testid={`card-video-${index}`}
+      onClick={() => onClick(videoSrc)}
+      onMouseEnter={() => {
+        const cardVideo = cardVideoRef.current;
+        if (cardVideo) {
+          cardVideo.play().catch(() => {});
+        }
+      }}
+      onMouseLeave={() => {
+        const cardVideo = cardVideoRef.current;
+        if (cardVideo) {
+          cardVideo.pause();
+          cardVideo.currentTime = 0;
+        }
+      }}
+    >
+      {videoSrc === "/샌디레이크_영상.mp4" ? (
+        <video
+          ref={cardVideoRef}
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      ) : (
+        <img 
+          src={heroImage}
+          alt={title}
+          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="w-14 h-14 rounded-full bg-amber-500 flex items-center justify-center">
+          <Play className="w-6 h-6 text-black ml-0.5" />
+        </div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">{category}</p>
+        <p className="font-serif text-lg">{title}</p>
+        <p className="text-sm text-white/50 mt-1">{duration}</p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Demo() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [showControls, setShowControls] = useState(true);
+  const [currentVideo, setCurrentVideo] = useState("/ramen.mp4");
   const videoRef = useRef<HTMLVideoElement>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-play on mount
+  // Auto-play on mount and when video source changes
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    video.load(); // Reload video when source changes
     video.play().catch((error) => {
       console.log("Video autoplay error:", error);
     });
-  }, []);
+  }, [currentVideo]);
 
   // Handle play/pause state changes
   useEffect(() => {
@@ -34,6 +102,14 @@ export default function Demo() {
       video.pause();
     }
   }, [isPlaying]);
+
+  const handleVideoClick = (videoSrc: string) => {
+    setCurrentVideo(videoSrc);
+    setIsPlaying(true);
+    setShowControls(true);
+    // Scroll to top to show the video
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleMouseEnter = () => {
     if (hideTimeoutRef.current) {
@@ -86,7 +162,11 @@ export default function Demo() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative rounded-3xl overflow-hidden bg-stone-900 aspect-[9/16] shadow-2xl shadow-amber-500/10 max-w-md mx-auto"
+            className={`relative rounded-3xl overflow-hidden bg-stone-900 shadow-2xl shadow-amber-500/10 mx-auto ${
+              currentVideo === "/샌디레이크_영상.mp4" 
+                ? "aspect-video max-w-4xl" 
+                : "aspect-[9/16] max-w-md"
+            }`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -96,8 +176,9 @@ export default function Demo() {
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
+              key={currentVideo}
             >
-              <source src="/ramen.mp4" type="video/mp4" />
+              <source src={currentVideo} type="video/mp4" />
             </video>
             
             <div 
@@ -166,35 +247,19 @@ export default function Demo() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "올리브 앤 타임", category: "파인 다이닝", duration: "1:45" },
-              { title: "사쿠라 카페", category: "일본식 퓨전", duration: "2:12" },
-              { title: "빈 카운터", category: "커피숍", duration: "1:58" }
+              { title: "샌디레이크", category: "터키식 커피", duration: "2:34", videoSrc: "/샌디레이크_영상.mp4" },
+              { title: "올리브 앤 타임", category: "파인 다이닝", duration: "1:45", videoSrc: "/ramen.mp4" },
+              { title: "사쿠라 카페", category: "일본식 퓨전", duration: "2:12", videoSrc: "/ramen.mp4" }
             ].map((video, index) => (
-              <motion.div
+              <VideoCard
                 key={video.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="group relative rounded-2xl overflow-hidden bg-stone-900 aspect-video cursor-pointer"
-                data-testid={`card-video-${index}`}
-              >
-                <img 
-                  src={heroImage}
-                  alt={video.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-14 h-14 rounded-full bg-amber-500 flex items-center justify-center">
-                    <Play className="w-6 h-6 text-black ml-0.5" />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-xs text-amber-400 uppercase tracking-wider mb-1">{video.category}</p>
-                  <p className="font-serif text-lg">{video.title}</p>
-                  <p className="text-sm text-white/50 mt-1">{video.duration}</p>
-                </div>
-              </motion.div>
+                title={video.title}
+                category={video.category}
+                duration={video.duration}
+                videoSrc={video.videoSrc}
+                index={index}
+                onClick={handleVideoClick}
+              />
             ))}
           </div>
         </div>
