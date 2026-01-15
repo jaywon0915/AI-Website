@@ -28,9 +28,9 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
   
-  --font-sans: 'Noto Sans KR', 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Noto Serif KR', 'Playfair Display', serif;
-  --font-display: 'Noto Serif KR', 'Playfair Display', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --font-serif: 'Noto Sans KR', sans-serif;
+  --font-display: 'Noto Sans KR', sans-serif;
 }
 
 :root {
@@ -68,9 +68,13 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Noto Sans KR', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  * {
+    font-family: 'Noto Sans KR', sans-serif;
   }
 }
 

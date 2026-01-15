@@ -1,8 +1,11 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Play, Sparkles, TrendingUp, Users, Video, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import heroImage from "@assets/generated_images/warm_cafe_interior_scene.png";
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -72,9 +75,9 @@ function Hero() {
           transition={{ duration: 1, delay: 0.5 }}  
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white font-medium leading-tight max-w-5xl"
         >
-          당신의 이야기를 
+        AI로 만드는
           <br />
-          <span className="italic text-amber-300">더 많은 사람들에게</span>
+          <span className="italic text-amber-300">우리 매장 시네마틱 광고</span>
         </motion.h1>
         
         <motion.p
@@ -403,43 +406,79 @@ function InstagramTrend() {
           </p>    
         </AnimatedSection>
         
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
           <AnimatedSection delay={0.1}>
-            <div className="space-y-6">
-              {[
-                {
-                  stat: "67%",
-                  title: "SNS 먼저 검색",
-                  description: "새로운 맛집을 찾을 때, 고객들은 방문할 가치가 있는지 인스타그램을 먼저 확인합니다."
-                },
-                {
-                  stat: "4.2배",
-                  title: "릴스로 더 많은 발견",
-                  description: "SNS 릴스의 영상 콘텐츠는 일반 게시물보다 4.2배 더 많은 비팔로워에게 도달합니다."
-                },
-                {
-                  stat: "83%",
-                  title: "비주얼 스토리 신뢰",
-                  description: "고객들은 진정성 있는 비주얼 스토리를 공유하는 비즈니스를 더 신뢰하고 방문합니다."
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex gap-5 p-6 rounded-2xl bg-white/80 border border-amber-100 shadow-lg shadow-amber-500/5"
+            <div className="bg-white/80 border border-amber-100 rounded-3xl p-8 shadow-lg shadow-amber-500/5">
+              <h3 className="text-2xl font-bold text-foreground mb-2">데모 신청하기</h3>
+              <p className="text-muted-foreground text-sm mb-6">
+                당신의 비즈니스 이야기를 영상으로 만들어보세요
+              </p>
+              <form className="space-y-5" onSubmit={(e) => {
+                e.preventDefault();
+                // Handle form submission here
+                console.log("Form submitted");
+              }}>
+                <div className="space-y-2">
+                  <Label htmlFor="business-name">사업체명 *</Label>
+                  <Input
+                    id="business-name"
+                    placeholder="예: 샌디레이크"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="person-name">신청자명 *</Label>
+                  <Input
+                    id="person-name"
+                    placeholder="홍길동"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">이메일 주소 *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@email.com"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="phone">전화번호 *</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="010-1234-5678"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="story-description">고객에게 전하고 싶은 스토리 *</Label>
+                  <Textarea
+                    id="story-description"
+                    placeholder="당신의 비즈니스 이야기, 전통, 특별한 점 등을 자세히 설명해주세요..."
+                    rows={4}
+                    required
+                    className="resize-none"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    더 자세할수록 더 좋은 결과를 얻을 수 있습니다
+                  </p>
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  size="lg"
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold"
                 >
-                  <div className="flex-shrink-0">
-                    <span className="text-3xl font-bold text-gradient">{item.stat}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg text-foreground mb-1">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+                  신청하기
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </form>
             </div>
           </AnimatedSection>
           

@@ -39,23 +39,15 @@ function VideoCard({ title, category, duration, videoSrc, index, onClick }: Vide
         }
       }}
     >
-      {videoSrc === "/샌디레이크_영상.mp4" ? (
-        <video
-          ref={cardVideoRef}
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      ) : (
-        <img 
-          src={heroImage}
-          alt={title}
-          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
-        />
-      )}
+      <video
+        ref={cardVideoRef}
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
+      >
+        <source src={videoSrc} type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="w-14 h-14 rounded-full bg-amber-500 flex items-center justify-center">
@@ -245,12 +237,13 @@ export default function Demo() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { title: "샌디레이크", category: "터키식 커피", duration: "2:34", videoSrc: "/샌디레이크_영상.mp4" },
-              { title: "올리브 앤 타임", category: "파인 다이닝", duration: "1:45", videoSrc: "/ramen.mp4" },
-              { title: "사쿠라 카페", category: "일본식 퓨전", duration: "2:12", videoSrc: "/ramen.mp4" }
-            ].map((video, index) => (
+              { title: "라멘", category: "일본식 라멘", duration: "2:00", videoSrc: "/ramen.mp4" }
+            ]
+            .filter((video) => video.videoSrc !== currentVideo)
+            .map((video, index) => (
               <VideoCard
                 key={video.title}
                 title={video.title}
